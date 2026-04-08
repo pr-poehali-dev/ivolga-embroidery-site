@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { useCart } from "@/context/CartContext";
+import type { Product } from "@/context/CartContext";
 
 const HERO_IMAGE =
   "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/files/180f7296-8d41-4eb9-afeb-2dcf937c1e06.jpg";
@@ -79,6 +82,21 @@ const CATEGORIES = [
   },
 ];
 
+const PRODUCTS: Product[] = [
+  { id: 1, title: "Закат над озером", category: "Пейзажи России", price: 350, type: "digital" },
+  { id: 2, title: "Берёзовая роща", category: "Пейзажи России", price: 350, type: "digital" },
+  { id: 3, title: "Осенняя река", category: "Пейзажи России", price: 390, type: "digital" },
+  { id: 4, title: "Тосканские холмы", category: "Зарубежные пейзажи", price: 390, type: "digital" },
+  { id: 5, title: "Альпийский луг", category: "Зарубежные пейзажи", price: 390, type: "digital" },
+  { id: 6, title: "Лиса в лесу", category: "Животные", price: 320, type: "digital" },
+  { id: 7, title: "Совы в ночи", category: "Животные", price: 320, type: "digital" },
+  { id: 8, title: "Пионы в вазе", category: "Цветы", price: 290, type: "digital" },
+  { id: 9, title: "Полевые ромашки", category: "Цветы", price: 290, type: "digital" },
+  { id: 10, title: "Яблочный натюрморт", category: "Овощи и фрукты", price: 280, type: "digital" },
+  { id: 11, title: "Осенний урожай", category: "Натюрморты", price: 310, type: "digital" },
+  { id: 12, title: "Дракон в замке", category: "Фэнтези", price: 450, type: "digital" },
+];
+
 const FAQ = [
   {
     q: "В каком формате приходит схема?",
@@ -114,10 +132,19 @@ const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [addedId, setAddedId] = useState<number | null>(null);
+  const { addItem, count } = useCart();
+  const navigate = useNavigate();
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addItem(product);
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1500);
   };
 
   return (
@@ -152,12 +179,26 @@ const Index = () => {
             ))}
           </nav>
 
-          <button
-            className="md:hidden p-2 text-primary"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <Icon name={menuOpen ? "X" : "Menu"} size={22} />
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate("/cart")}
+              className="relative p-2 text-primary hover:text-accent transition-colors"
+              aria-label="Корзина"
+            >
+              <Icon name="ShoppingCart" size={22} />
+              {count > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-accent text-ivory text-[10px] font-bold rounded-full flex items-center justify-center font-sans">
+                  {count}
+                </span>
+              )}
+            </button>
+            <button
+              className="md:hidden p-2 text-primary"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <Icon name={menuOpen ? "X" : "Menu"} size={22} />
+            </button>
+          </div>
         </div>
 
         {menuOpen && (
@@ -231,72 +272,52 @@ const Index = () => {
             <div className="gold-line w-40 mx-auto" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {CATEGORIES.map((cat, i) => (
+          {/* Фильтр по категориям */}
+          <div className="flex flex-wrap gap-2 mb-8 justify-center">
+            <button
+              onClick={() => setActiveCategory(null)}
+              className={`px-4 py-1.5 text-xs font-sans uppercase tracking-widest transition-colors border ${activeCategory === null ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}
+            >
+              Все
+            </button>
+            {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() =>
-                  setActiveCategory(activeCategory === cat.id ? null : cat.id)
-                }
-                className={`group text-left p-6 classic-border transition-all duration-300 hover:shadow-md hover:border-accent/50 ${
-                  activeCategory === cat.id
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-card hover:bg-cream"
-                }`}
-                style={{ animationDelay: `${i * 0.05}s` }}
+                onClick={() => setActiveCategory(activeCategory === cat.id ? null : cat.id)}
+                className={`px-4 py-1.5 text-xs font-sans uppercase tracking-widest transition-colors border ${activeCategory === cat.id ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <span className="text-3xl">{cat.icon}</span>
-                  <span
-                    className={`text-xs font-sans uppercase tracking-widest px-2 py-1 ${
-                      activeCategory === cat.id
-                        ? "bg-ivory/20 text-ivory"
-                        : "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    {cat.count} схем
-                  </span>
-                </div>
-                <h3
-                  className={`font-serif text-xl font-medium mb-2 ${
-                    activeCategory === cat.id ? "text-ivory" : "text-foreground"
-                  }`}
-                >
-                  {cat.title}
-                </h3>
-                <p
-                  className={`text-sm leading-relaxed ${
-                    activeCategory === cat.id
-                      ? "text-ivory/75"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {cat.desc}
-                </p>
-                <div
-                  className={`mt-4 flex items-center gap-2 text-xs uppercase tracking-widest font-sans ${
-                    activeCategory === cat.id ? "text-gold" : "text-accent"
-                  }`}
-                >
-                  Смотреть схемы
-                  <Icon name="ArrowRight" size={14} />
-                </div>
+                {cat.icon} {cat.title}
               </button>
             ))}
           </div>
 
-          <div className="text-center mt-10 text-muted-foreground text-sm font-sans">
-            Выберите категорию, чтобы посмотреть схемы. Оформление покупок —
-            через{" "}
-            <a
-              href="https://vk.com/club168347935"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-4 hover:text-accent transition-colors"
-            >
-              сообщество ВКонтакте
-            </a>
-            .
+          {/* Товары */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {PRODUCTS.filter((p) => activeCategory === null || p.category === CATEGORIES.find(c => c.id === activeCategory)?.title).map((product) => (
+              <div key={product.id} className="bg-card border border-border flex flex-col hover:shadow-md hover:border-accent/40 transition-all duration-300">
+                <div className="bg-muted h-40 flex items-center justify-center text-4xl font-serif text-muted-foreground/30 select-none">
+                  {CATEGORIES.find(c => c.title === product.category)?.icon || "🧵"}
+                </div>
+                <div className="p-4 flex flex-col flex-1">
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-sans mb-1">{product.category}</p>
+                  <h3 className="font-serif text-base text-foreground font-medium leading-tight mb-3 flex-1">{product.title}</h3>
+                  <div className="flex items-center justify-between mt-auto">
+                    <span className="font-serif text-xl text-primary">{product.price} ₽</span>
+                    <button
+                      onClick={() => handleAddToCart(product)}
+                      className={`flex items-center gap-1.5 px-3 py-2 text-xs font-sans uppercase tracking-widest transition-all duration-300 ${addedId === product.id ? "bg-green-600 text-white" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}
+                    >
+                      <Icon name={addedId === product.id ? "Check" : "ShoppingCart"} size={13} />
+                      {addedId === product.id ? "Добавлено" : "В корзину"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8 text-muted-foreground text-sm font-sans">
+            Выберите товар и положите его в корзину
           </div>
         </div>
       </section>
