@@ -4,6 +4,12 @@ import Icon from "@/components/ui/icon";
 const HERO_IMAGE =
   "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/files/180f7296-8d41-4eb9-afeb-2dcf937c1e06.jpg";
 
+const COLLAGE_IMAGES = [
+  "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/968b752d-1e0d-4357-a494-d11527758e37.jpg",
+  "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/fa20cf07-7764-40f3-9ec0-b74a3205149d.jpg",
+  "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/bdc2a5da-27d5-4e8d-a3ae-cb80efbb01f2.jpg",
+];
+
 const LOGO_BIRD =
   "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/632d9dbf-0a86-405d-a478-e5d6af26a706.jpg";
 
@@ -178,7 +184,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-8 flex flex-col justify-center min-h-[90vh] py-24">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center justify-between min-h-[90vh] py-24 gap-12">
           <div className="max-w-xl">
             <div className="animate-fade-up text-gold text-sm uppercase tracking-[0.3em] mb-4 font-sans">
               Авторские схемы для вышивки крестом
@@ -204,6 +210,39 @@ const Index = () => {
               >
                 Как купить
               </button>
+            </div>
+          </div>
+
+          {/* Коллаж из картин */}
+          <div className="hidden lg:flex flex-col gap-3 animate-fade-up delay-400 flex-shrink-0" style={{ width: 340 }}>
+            <div className="flex gap-3">
+              <div className="relative overflow-hidden shadow-2xl border-4 border-ivory/20" style={{ width: 160, height: 160 }}>
+                <img
+                  src={COLLAGE_IMAGES[0]}
+                  alt="Схема вышивки"
+                  className="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-primary/20" />
+              </div>
+              <div className="relative overflow-hidden shadow-2xl border-4 border-ivory/20 self-end" style={{ width: 160, height: 120 }}>
+                <img
+                  src={COLLAGE_IMAGES[1]}
+                  alt="Схема вышивки"
+                  className="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-primary/20" />
+              </div>
+            </div>
+            <div className="relative overflow-hidden shadow-2xl border-4 border-ivory/20" style={{ height: 180 }}>
+              <img
+                src={COLLAGE_IMAGES[2]}
+                alt="Схема вышивки"
+                className="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-primary/20" />
+              <div className="absolute bottom-3 right-3 text-ivory/60 font-sans text-xs uppercase tracking-widest">
+                Авторские работы
+              </div>
             </div>
           </div>
         </div>
