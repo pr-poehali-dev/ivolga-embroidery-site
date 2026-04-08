@@ -176,78 +176,60 @@ const Index = () => {
       </header>
 
       {/* ── HERO ── */}
-      <section id="hero" className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center justify-between min-h-[90vh] py-24 gap-12">
-          <div className="max-w-xl">
-            <div className="animate-fade-up text-gold text-sm uppercase tracking-[0.3em] mb-4 font-sans">
-              Авторские схемы для вышивки крестом
-            </div>
-            <h1 className="animate-fade-up delay-100 font-serif text-ivory text-5xl sm:text-6xl md:text-7xl font-light leading-[1.1] mb-6">
-              Иволга
-            </h1>
-            <p className="animate-fade-up delay-200 text-ivory/80 text-lg leading-relaxed mb-8 font-sans font-light">
-              Авторские схемы от Евгении Никотиной — каждая работа создана
-              с&nbsp;душой и вниманием к&nbsp;деталям. От пейзажей России до
-              сказочного фэнтези.
-            </p>
-            <div className="animate-fade-up delay-300 flex flex-wrap gap-4">
-              <button
-                onClick={() => scrollTo("catalog")}
-                className="px-8 py-3 bg-gold text-ivory font-sans text-sm tracking-widest uppercase hover:bg-accent/90 transition-colors"
-              >
-                Смотреть схемы
-              </button>
-              <button
-                onClick={() => scrollTo("how")}
-                className="px-8 py-3 border border-ivory/50 text-ivory font-sans text-sm tracking-widest uppercase hover:bg-ivory/10 transition-colors"
-              >
-                Как купить
-              </button>
-            </div>
+      <section id="hero" className="relative overflow-hidden bg-primary" style={{ minHeight: "90vh" }}>
+        {/* Три картины — фон */}
+        <div className="absolute inset-0 flex">
+          <div className="flex-1 relative overflow-hidden">
+            <img src={COLLAGE_IMAGES[0]} alt="" className="w-full h-full object-cover object-center scale-105" />
           </div>
-
-          {/* Коллаж из картин */}
-          <div className="hidden lg:flex flex-col gap-3 animate-fade-up delay-400 flex-shrink-0" style={{ width: 340 }}>
-            <div className="flex gap-3">
-              <div className="relative overflow-hidden shadow-2xl border-4 border-ivory/20" style={{ width: 160, height: 160 }}>
-                <img
-                  src={COLLAGE_IMAGES[0]}
-                  alt="Схема вышивки"
-                  className="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-primary/20" />
-              </div>
-              <div className="relative overflow-hidden shadow-2xl border-4 border-ivory/20 self-end" style={{ width: 160, height: 120 }}>
-                <img
-                  src={COLLAGE_IMAGES[1]}
-                  alt="Схема вышивки"
-                  className="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-primary/20" />
-              </div>
-            </div>
-            <div className="relative overflow-hidden shadow-2xl border-4 border-ivory/20" style={{ height: 180 }}>
-              <img
-                src={COLLAGE_IMAGES[2]}
-                alt="Схема вышивки"
-                className="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-primary/20" />
-              <div className="absolute bottom-3 right-3 text-ivory/60 font-sans text-xs uppercase tracking-widest">
-                Авторские работы
-              </div>
-            </div>
+          <div className="flex-1 relative overflow-hidden">
+            <img src={COLLAGE_IMAGES[1]} alt="" className="w-full h-full object-cover object-center scale-105" />
+          </div>
+          <div className="flex-1 relative overflow-hidden">
+            <img src={COLLAGE_IMAGES[2]} alt="" className="w-full h-full object-cover object-center scale-105" />
           </div>
         </div>
 
-        <div className="absolute bottom-8 right-8 w-24 h-24 border-b border-r border-ivory/20 hidden md:block" />
+        {/* Тонкие разделители между картинами */}
+        <div className="absolute inset-0 flex pointer-events-none">
+          <div className="flex-1" />
+          <div className="w-px bg-ivory/30" />
+          <div className="flex-1" />
+          <div className="w-px bg-ivory/30" />
+          <div className="flex-1" />
+        </div>
+
+        {/* Тёмный градиент снизу для читаемости текста */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-transparent to-primary/60" />
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-8 flex flex-col items-center justify-end min-h-[90vh] py-20 text-center">
+          <div className="animate-fade-up text-gold text-sm uppercase tracking-[0.3em] mb-4 font-sans">
+            Авторские схемы для вышивки крестом
+          </div>
+          <h1 className="animate-fade-up delay-100 font-serif text-ivory text-5xl sm:text-6xl md:text-7xl font-light leading-[1.1] mb-6">
+            Иволга
+          </h1>
+          <p className="animate-fade-up delay-200 text-ivory/80 text-lg leading-relaxed mb-10 font-sans font-light max-w-lg">
+            Авторские схемы от Евгении Никотиной — каждая работа создана
+            с&nbsp;душой и вниманием к&nbsp;деталям. От пейзажей России до
+            сказочного фэнтези.
+          </p>
+          <div className="animate-fade-up delay-300 flex flex-wrap gap-4 justify-center">
+            <button
+              onClick={() => scrollTo("catalog")}
+              className="px-8 py-3 bg-gold text-ivory font-sans text-sm tracking-widest uppercase hover:bg-accent/90 transition-colors"
+            >
+              Смотреть схемы
+            </button>
+            <button
+              onClick={() => scrollTo("how")}
+              className="px-8 py-3 border border-ivory/50 text-ivory font-sans text-sm tracking-widest uppercase hover:bg-ivory/10 transition-colors"
+            >
+              Как купить
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* ── КАТАЛОГ ── */}
