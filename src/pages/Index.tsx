@@ -4,6 +4,9 @@ import Icon from "@/components/ui/icon";
 const HERO_IMAGE =
   "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/files/180f7296-8d41-4eb9-afeb-2dcf937c1e06.jpg";
 
+const LOGO_BIRD =
+  "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/632d9dbf-0a86-405d-a478-e5d6af26a706.jpg";
+
 const CATEGORIES = [
   {
     id: 1,
@@ -120,7 +123,7 @@ const Index = () => {
             onClick={() => scrollTo("hero")}
             className="flex items-center gap-3 group"
           >
-            <span className="text-2xl">🐦</span>
+            <img src={LOGO_BIRD} alt="Иволга" className="w-10 h-10 object-contain drop-shadow-sm" />
             <div className="text-left leading-none">
               <div className="font-serif text-xl font-semibold text-primary tracking-wide">
                 Иволга
@@ -517,7 +520,7 @@ const Index = () => {
       <footer className="bg-foreground text-ivory/50 py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans">
           <div className="flex items-center gap-2">
-            <span className="text-base">🐦</span>
+            <img src={LOGO_BIRD} alt="Иволга" className="w-7 h-7 object-contain opacity-70" />
             <span className="text-ivory/70">
               Иволга — авторские схемы для вышивки крестом
             </span>
