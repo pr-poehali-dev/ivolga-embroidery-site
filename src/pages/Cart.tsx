@@ -6,23 +6,15 @@ import Icon from "@/components/ui/icon";
 const LOGO_BIRD =
   "https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/632d9dbf-0a86-405d-a478-e5d6af26a706.jpg";
 
-type DeliveryType = "email" | "post" | "sdek";
 type PaymentType = "card" | "sbp";
 
 interface OrderForm {
   name: string;
   email: string;
   phone: string;
-  delivery: DeliveryType;
   payment: PaymentType;
   comment: string;
 }
-
-const DELIVERY_OPTIONS: { value: DeliveryType; label: string; desc: string; icon: string }[] = [
-  { value: "email", label: "Электронная доставка", desc: "PDF на email — для схем", icon: "Mail" },
-  { value: "post", label: "Почта России", desc: "Для сопутствующих товаров", icon: "Package" },
-  { value: "sdek", label: "СДЭК", desc: "Для сопутствующих товаров", icon: "Truck" },
-];
 
 const PAYMENT_OPTIONS: { value: PaymentType; label: string; desc: string; icon: string }[] = [
   { value: "card", label: "Оплата картой", desc: "Реквизиты придут на почту", icon: "CreditCard" },
@@ -38,7 +30,6 @@ export default function Cart() {
     name: "",
     email: "",
     phone: "",
-    delivery: "email",
     payment: "card",
     comment: "",
   });
@@ -169,31 +160,9 @@ export default function Cart() {
                     </div>
                   </div>
 
-                  <div className="bg-card border border-border p-6 space-y-4">
-                    <h2 className="font-serif text-xl text-foreground">Способ доставки</h2>
-                    <p className="text-sm text-muted-foreground">Для схем выбирайте электронную доставку</p>
-                    <div className="space-y-2">
-                      {DELIVERY_OPTIONS.map((opt) => (
-                        <label
-                          key={opt.value}
-                          className={`flex items-center gap-4 p-4 border cursor-pointer transition-colors ${form.delivery === opt.value ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"}`}
-                        >
-                          <input
-                            type="radio"
-                            name="delivery"
-                            value={opt.value}
-                            checked={form.delivery === opt.value}
-                            onChange={() => update("delivery", opt.value)}
-                            className="accent-primary"
-                          />
-                          <Icon name={opt.icon as "Mail"} size={20} className="text-primary flex-shrink-0" />
-                          <div>
-                            <div className="text-sm font-medium text-foreground">{opt.label}</div>
-                            <div className="text-xs text-muted-foreground">{opt.desc}</div>
-                          </div>
-                        </label>
-                      ))}
-                    </div>
+                  <div className="bg-card border border-border p-4 flex items-center gap-3 text-sm text-muted-foreground">
+                    <Icon name="Mail" size={18} className="text-primary flex-shrink-0" />
+                    <span>Доставка электронная — схема придёт на указанный email в виде PDF</span>
                   </div>
 
                   <button
@@ -324,7 +293,7 @@ export default function Cart() {
               <p><span className="text-muted-foreground">Имя:</span> {form.name}</p>
               <p><span className="text-muted-foreground">Email:</span> {form.email}</p>
               <p><span className="text-muted-foreground">Телефон:</span> {form.phone}</p>
-              <p><span className="text-muted-foreground">Доставка:</span> {DELIVERY_OPTIONS.find(d => d.value === form.delivery)?.label}</p>
+              <p><span className="text-muted-foreground">Доставка:</span> Электронная (PDF на email)</p>
               <p><span className="text-muted-foreground">Оплата:</span> {PAYMENT_OPTIONS.find(p => p.value === form.payment)?.label}</p>
             </div>
             <button
