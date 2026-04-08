@@ -176,32 +176,18 @@ const Index = () => {
       </header>
 
       {/* ── HERO ── */}
-      <section id="hero" className="relative overflow-hidden bg-primary" style={{ minHeight: "90vh" }}>
-        {/* Три картины — фон */}
-        <div className="absolute inset-0 flex">
-          <div className="flex-1 relative overflow-hidden">
-            <img src={COLLAGE_IMAGES[0]} alt="" className="w-full h-full object-cover object-center scale-105" />
-          </div>
-          <div className="flex-1 relative overflow-hidden">
-            <img src={COLLAGE_IMAGES[1]} alt="" className="w-full h-full object-cover object-center scale-105" />
-          </div>
-          <div className="flex-1 relative overflow-hidden">
-            <img src={COLLAGE_IMAGES[2]} alt="" className="w-full h-full object-cover object-center scale-105" />
-          </div>
+      <section id="hero" className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
+        {/* Панорама четырёх сезонов */}
+        <div className="absolute inset-0">
+          <img
+            src="https://cdn.poehali.dev/projects/8aa0f761-04b1-4e85-a565-56927cc8e748/bucket/fb650fb8-7ff2-4451-b015-05d8beb7e6fb.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
         </div>
 
-        {/* Тонкие разделители между картинами */}
-        <div className="absolute inset-0 flex pointer-events-none">
-          <div className="flex-1" />
-          <div className="w-px bg-ivory/30" />
-          <div className="flex-1" />
-          <div className="w-px bg-ivory/30" />
-          <div className="flex-1" />
-        </div>
-
-        {/* Тёмный градиент снизу для читаемости текста */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-transparent to-primary/60" />
+        {/* Градиент снизу для читаемости текста */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a2a1e]/90 via-[#1a2a1e]/50 to-transparent" />
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-8 flex flex-col items-center justify-end min-h-[90vh] py-20 text-center">
           <div className="animate-fade-up text-gold text-sm uppercase tracking-[0.3em] mb-4 font-sans">

@@ -5,23 +5,23 @@
 @layer base {
   :root {
     /* Иволга — изумруд + слоновая кость + золото */
-    --background: 40 30% 97%;
-    --foreground: 160 30% 12%;
+    --background: 210 25% 95%;
+    --foreground: 210 30% 15%;
 
-    --card: 40 20% 95%;
-    --card-foreground: 160 30% 12%;
+    --card: 210 20% 97%;
+    --card-foreground: 210 30% 15%;
 
-    --popover: 40 20% 95%;
-    --popover-foreground: 160 30% 12%;
+    --popover: 210 20% 97%;
+    --popover-foreground: 210 30% 15%;
 
     --primary: 158 38% 22%;
     --primary-foreground: 40 30% 97%;
 
-    --secondary: 40 25% 90%;
-    --secondary-foreground: 160 30% 20%;
+    --secondary: 210 20% 88%;
+    --secondary-foreground: 210 30% 20%;
 
-    --muted: 40 20% 92%;
-    --muted-foreground: 160 15% 42%;
+    --muted: 210 18% 90%;
+    --muted-foreground: 210 15% 45%;
 
     --accent: 42 65% 50%;
     --accent-foreground: 40 30% 97%;
@@ -29,8 +29,8 @@
     --destructive: 0 72% 50%;
     --destructive-foreground: 40 30% 97%;
 
-    --border: 40 20% 82%;
-    --input: 40 20% 86%;
+    --border: 210 20% 82%;
+    --input: 210 20% 86%;
     --ring: 158 38% 22%;
 
     --radius: 0.25rem;
